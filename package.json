@@ -26,7 +26,7 @@
     "@dnb-hugo/eslint-config": "2.0.1",
     "@dnb-hugo/remark-config": "2.0.0",
     "@dnb-hugo/standard-version-config": "2.0.0",
-    "@dnb-hugo/stylelint-config": "2.0.11",
+    "@dnb-hugo/stylelint-config": "2.0.12",
     "@dnb-hugo/textlint-config": "2.0.0",
     "standard-version": "9.1.1"
   },
