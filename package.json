@@ -9,7 +9,7 @@
   },
   "bugs": "git+https://github.com/dnb-hugo/browserslist-config/issues",
   "dependencies": {
-    "browserslist": "4.16.3"
+    "browserslist": "4.16.4"
   },
   "devDependencies": {
     "@dnb-hugo/commitlint-config": "2.0.9",
