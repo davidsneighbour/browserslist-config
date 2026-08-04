@@ -1,0 +1,64 @@
+{
+  "name": "@dnbhq/browserslist-config",
+  "description": "Shared Browserslist configuration for DNBHQ projects.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnbhq/browserslist-config.git"
+  },
+  "author": "Patrick Kollitsch <davidsneighbourdev+gh@gmail.com> (https://davids-neighbour.com)",
+  "bugs": "https://github.com/dnbhq/browserslist-config/issues",
+  "homepage": "https://github.com/dnbhq/browserslist-config#readme",
+  "dependencies": {
+    "browserslist": "4.28.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.0",
+    "@dnbhq/biome-config": "0.2.3",
+    "@dnbhq/tsconfig": "0.1.6",
+    "@release-it/conventional-changelog": "12.0.0",
+    "@types/node": "25.9.1",
+    "lint-staged": "16.4.0",
+    "release-it": "21.0.1",
+    "simple-git-hooks": "2.13.1",
+    "typescript": "6.0.3"
+  },
+  "scripts": {
+    "check": "biome check",
+    "lint": "biome lint",
+    "lint:staged": "lint-staged",
+    "prepare": "simple-git-hooks",
+    "release": "release-it",
+    "release:dry": "release-it --dry-run",
+    "test": "npm run check"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "full.js",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "engines": {
+    "node": ">=25"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./full": "./full.js",
+    "./full.js": "./full.js"
+  },
+  "lint-staged": {
+    "*.{js,json,ts}": "biome check --write --no-errors-on-unmatched"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "type": "module"
+}
