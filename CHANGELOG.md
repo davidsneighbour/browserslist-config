@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.2](https://github.com/dnbhq/browserslist-config/compare/v0.1.1...v0.1.2) (2026-08-04)
+
+### Bug Fixes
+
+* **ci:** use node 26 in publish workflow ([adda594](https://github.com/dnbhq/browserslist-config/commit/adda594a0b656435e34a30383096babdfd04e994))
+
 ## 0.1.1 (2026-08-04)
 
 ### Chores
