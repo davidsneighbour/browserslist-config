@@ -1,39 +1,61 @@
-# Repository Guidelines
+# Repository guidelines
 
-## Project Structure & Module Organization
+This is the canonical source of truth for AI agent behaviour in this repository. It applies equally to all agents (Claude, Codex, and others). Agent-specific files (for example `CLAUDE.md`) contain only deltas from what's written here.
 
-This repository publishes `@davidsneighbour/browserslist-config`, a small ESM package with two Browserslist entry points:
+Read the referenced files under `.agents/instructions/` when the section says to — they carry the same authority as this file.
 
-- `index.js` exports the default `baseline widely available` target.
-- `full.js` exports `baseline widely available with downstream`.
-- `README.md` documents installation, usage, supported browsers, and release notes.
-- `package.json` defines package exports, published files, scripts, hooks, and release tooling.
-- `biome.json` extends the shared `@davidsneighbour/biome-config` rules.
+## What this is
 
-There is no separate `src/`, test fixture, or asset directory. Keep package contents minimal; only files listed in `package.json#files` are published.
+`@dnbhq/browserslist-config` is a tiny, published npm package: a shared Browserslist configuration for @davidsneighbour's projects. There is no build step and no runtime logic — the entire package surface is two one-line config files.
 
-## Build, Test, and Development Commands
+- `index.js` — default export, targets `baseline widely available` (the conservative Baseline browser set).
+- `full.js` — export at `./full`, targets `baseline widely available with downstream` (adds browsers built on the same engines, e.g. Opera, Samsung Internet, WebView Android).
 
-- `npm run check` runs `biome check` across the repository.
-- `npm run lint` runs Biome linting only.
-- `npm run test` currently aliases `npm run check`; run it before release or handoff.
-- `npm run release:dry` previews the `release-it` workflow.
-- `npm run release` creates a release using `release-it` and conventional changelog tooling.
+Both are consumed by other projects via `.browserslistrc` (`extends @dnbhq/browserslist-config` or `.../full`) or the `browserslist` field in `package.json`.
 
-Use Node `>=25`, as declared in `package.json#engines`.
+Only `index.js`, `full.js`, `README.md`, `CHANGELOG.md`, and `LICENSE` are published (see `files` in `package.json`) — changes elsewhere in the repo don't affect the published package.
 
-## Coding Style & Naming Conventions
+There is no separate `src/`, test fixture, or asset directory. Keep package contents minimal.
 
-Use modern ESM syntax and default exports for Browserslist query arrays. Keep entry point files short and readable, with comments only for useful external references. Follow the shared Biome configuration for formatting and linting; do not hand-format against it. File names for exported configurations should be lowercase and stable because consumers import them directly, for example `@davidsneighbour/browserslist-config/full`.
+## Commands
 
-## Testing Guidelines
+```bash
+npm run check         # biome check (lint + format check)
+npm run lint          # biome lint only
+npm run test          # alias for `npm run check` — this is the full test suite
+npm run release:dry   # dry-run a release-it release
+npm run release       # cut a release (see Release process below)
+```
 
-There is no dedicated unit test framework yet. Treat Biome as the current quality gate and run `npm run test` after editing JavaScript, JSON, or package metadata. When changing Browserslist queries, also verify examples in `README.md` stay accurate and that `package.json#exports` exposes any new entry point.
+There is no separate test framework; `npm test` running `biome check` *is* the CI-equivalent local check. Run it before release or handoff.
 
-## Commit & Pull Request Guidelines
+## Architecture notes
 
-History uses Conventional Commits, for example `fix(ci): use node 26 in publish workflow` and `chore(release): v0.1.2`. Keep commits focused and use scopes when they clarify the affected area. Pull requests should describe the behavior change, mention any package export or release impact, link related issues, and include the validation command run, usually `npm run test`.
+- Package is ESM-only (`"type": "module"`), targets Node `>=25` (see `package.json#engines`).
+- Biome config extends `@dnbhq/biome-config`; don't add a local rule set, extend it instead.
+- `tsconfig.json` extends `@dnbhq/tsconfig/strict` and only covers `.release-it.ts` — there's no other TypeScript source in this repo, TS is used purely for the typed `release-it` config.
+- `simple-git-hooks` + `lint-staged` run `biome check --write` on staged `*.{js,json,ts}` at pre-commit.
 
-## Agent-Specific Instructions
+## Coding style & naming conventions
 
-Preserve unrelated local changes. If `CLAUDE.md` or other untracked files are present, do not stage or edit them unless the task explicitly asks for it.
+Use modern ESM syntax and default exports for Browserslist query arrays. Keep entry point files short and readable, with comments only for useful external references. Follow the shared Biome configuration for formatting and linting; do not hand-format against it. File names for exported configurations must be lowercase and stable because consumers import them directly, for example `@dnbhq/browserslist-config/full`.
+
+## Testing guidelines
+
+Treat Biome as the current quality gate and run `npm run test` after editing JavaScript, JSON, or package metadata. When changing Browserslist queries, also verify examples in `README.md` stay accurate and that `package.json#exports` exposes any new entry point.
+
+## Documentation conventions
+
+The browser version tables in `README.md` (Widely available / Widely available with downstream) are the source of truth for what `index.js`/`full.js` target conceptually, but the actual Browserslist query strings (`'baseline widely available'`, `'baseline widely available with downstream'`) are resolved dynamically by the `browserslist` package at consumer install/build time — the tables are documentation, not something to hand-sync with a browser list. If the underlying Baseline definition changes, update the tables in `README.md` to match, not the query strings.
+
+## Commit & pull request guidelines
+
+History uses Conventional Commits, for example `fix(ci): use node 26 in publish workflow` and `chore(release): v0.1.2`. Keep commits focused and use scopes when they clarify the affected area. Pull requests should describe the behaviour change, mention any package export or release impact, link related issues, and include the validation command run, usually `npm run test`.
+
+## Release process
+
+Follow `.agents/instructions/repository/release.md` for the full release-it and npm publish workflow, including version bump rules and CI publish behaviour.
+
+## Agent-specific instructions
+
+Preserve unrelated local changes. If untracked files are present, do not stage or edit them unless the task explicitly asks for it.
