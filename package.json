@@ -12,18 +12,18 @@
   "bugs": "https://github.com/davidsneighbour/browserslist-config/issues",
   "homepage": "https://github.com/davidsneighbour/browserslist-config#readme",
   "dependencies": {
-    "browserslist": "4.28.7"
+    "browserslist": "4.28.8"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.0",
+    "@biomejs/biome": "2.5.11",
     "@dnbhq/biome-config": "0.2.3",
     "@dnbhq/tsconfig": "0.1.6",
     "@release-it/conventional-changelog": "12.0.0",
-    "@types/node": "25.9.1",
-    "lint-staged": "16.4.0",
-    "release-it": "21.0.1",
-    "simple-git-hooks": "2.13.1",
-    "typescript": "6.0.3"
+    "@types/node": "26.4.1",
+    "lint-staged": "17.4.1",
+    "release-it": "21.0.2",
+    "simple-git-hooks": "2.14.0",
+    "typescript": "7.0.2"
   },
   "scripts": {
     "check": "biome check",
