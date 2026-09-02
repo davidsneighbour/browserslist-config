@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.0](https://github.com/davidsneighbour/browserslist-config/compare/v0.1.4...v0.2.0) (2026-09-02)
+
+### Feat
+
+* onboard to @dnbhq/release-config and fix migration issues ([af5c2dc](https://github.com/davidsneighbour/browserslist-config/commit/af5c2dc689fdb1111aae4bdbee042ecd737e6759))
+
 ## [0.1.4](https://github.com/davidsneighbour/browserslist-config/compare/v0.1.3...v0.1.4) (2026-09-02)
 
 ### Build

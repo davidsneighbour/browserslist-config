@@ -1,7 +1,7 @@
 {
   "name": "@dnbhq/browserslist-config",
   "description": "Shared Browserslist configuration for @davidsneighbour's projects.",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "license": "MIT",
   "private": false,
   "repository": {
