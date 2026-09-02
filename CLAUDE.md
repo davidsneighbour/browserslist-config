@@ -28,20 +28,21 @@ There is no separate test framework; `npm test` running `biome check` *is* the C
 ## Architecture notes
 
 - Package is ESM-only (`"type": "module"`), targets Node >=25.
-- Biome config extends `@davidsneighbour/biome-config`; don't add a local rule set, extend it instead.
-- `tsconfig.json` extends `@davidsneighbour/tsconfig/strict` and only covers `.release-it.ts` — there's no other TypeScript source in this repo, TS is used purely for the typed `release-it` config.
+- Biome config extends `@dnbhq/biome-config`; don't add a local rule set, extend it instead.
+- `tsconfig.json` extends `@dnbhq/tsconfig/strict` and only covers `.release-it.ts` — there's no other TypeScript source in this repo, TS is used purely for the typed `release-it` config.
 - `simple-git-hooks` + `lint-staged` run `biome check --write` on staged `*.{js,json,ts}` at pre-commit.
 
 ## Release process
 
-Releases are driven by `release-it` (`.release-it.ts`) using Conventional Commits:
+Releases are driven by `release-it` (`.release-it.ts`) via the shared `@dnbhq/release-config` factory (`createReleaseConfig(...)`), using Conventional Commits:
 
-- `git.requireBranch: 'main'` and `requireCleanWorkingDir: true` — releases must happen from a clean `main`.
-- Version bump is derived from commit types via a custom `whatBump`: any commit with breaking-change notes → major; `feat`/`content` → minor; `fix`/`build`/`chore`/`ci`/`docs`/`perf`/`refactor`/`revert`/`style`/`test` → patch.
-- `release-it` commits (`chore(release): v<version>`, with `--no-verify`), tags `v<version>`, and pushes with `--follow-tags`. It does **not** publish to npm itself (`npm.publish: false`).
+- `git.requireBranch: 'main'` (passed through `overrides.git`) and `requireCleanWorkingDir: true` (a shared default) — releases must happen from a clean `main`.
+- Version bump comes from `@release-it/conventional-changelog`'s `conventionalcommits` preset: any commit with breaking-change notes → major; `feat` → minor; any other configured type (`fix`/`build`/`chore`/`ci`/`docs`/`perf`/`refactor`/`revert`/`style`/`test`, listed via `scopes.patchTypes`) → patch. Commit types outside these lists don't trigger a release.
+- GitHub releases authenticate with the shared default token env var `GITHUB_TOKEN_CONTENT_PRIVATE` (`githubTokenRef`, not overridden here) — not the GitHub Actions default `GITHUB_TOKEN`.
+- `release-it` commits (`chore(release): v<version>`, with `--no-verify`), tags `v<version>`, and pushes with `--follow-tags`. It does **not** publish to npm itself (`npm.publish: false`, a shared default).
 - Publishing to npm happens via the separate `.github/workflows/publish.yml` GitHub Actions workflow, triggered only by pushing a `v*` tag. That workflow verifies the tag matches `package.json`'s version, runs `npm test`, then `npm publish` (with provenance).
 
-So: `npm run release` locally (or `release:dry` first) creates and pushes the tag; CI does the actual npm publish.
+So: `npm run release` locally (or `release:dry` first) creates and pushes the tag; CI does the actual npm publish. Only pass options to `createReleaseConfig(...)` that this repo actually needs (`scopes` and `overrides.git.requireBranch` today) — everything else comes from the shared package's defaults; check `@dnbhq/release-config`'s README before changing shape.
 
 ## When updating supported browsers
 

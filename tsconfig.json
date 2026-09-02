@@ -1,5 +1,5 @@
 {
-  "extends": "@davidsneighbour/tsconfig/strict",
+  "extends": "@dnbhq/tsconfig/strict",
   "include": ["**/*.ts", ".release-it.ts"],
   "exclude": ["node_modules", "dist"]
 }
