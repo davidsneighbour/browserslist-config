@@ -30,7 +30,7 @@
     "lint": "biome lint",
     "lint:staged": "lint-staged",
     "prepare": "simple-git-hooks",
-    "release": "release-it",
+    "release": "release-it --ci",
     "release:dry": "release-it --dry-run",
     "test": "npm run check"
   },
