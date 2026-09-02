@@ -4,12 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-`@dnbhq/browserslist-config` is a tiny, published npm package: a shared Browserslist configuration for DNBHQ projects. There is no build step and no runtime logic — the entire package surface is two one-line config files.
+`@davidsneighbour/browserslist-config` is a tiny, published npm package: a shared Browserslist configuration for @davidsneighbour's projects. There is no build step and no runtime logic — the entire package surface is two one-line config files.
 
 - `index.js` — default export, targets `baseline widely available` (the conservative Baseline browser set).
 - `full.js` — export at `./full`, targets `baseline widely available with downstream` (adds browsers built on the same engines, e.g. Opera, Samsung Internet, WebView Android).
 
-Both are consumed by other projects via `.browserslistrc` (`extends @dnbhq/browserslist-config` or `.../full`) or the `browserslist` field in `package.json`.
+Both are consumed by other projects via `.browserslistrc` (`extends @davidsneighbour/browserslist-config` or `.../full`) or the `browserslist` field in `package.json`.
 
 Only `index.js`, `full.js`, `README.md`, `CHANGELOG.md`, and `LICENSE` are published (see `files` in `package.json`) — changes elsewhere in the repo don't affect the published package.
 
@@ -28,8 +28,8 @@ There is no separate test framework; `npm test` running `biome check` *is* the C
 ## Architecture notes
 
 - Package is ESM-only (`"type": "module"`), targets Node >=25.
-- Biome config extends `@dnbhq/biome-config`; don't add a local rule set, extend it instead.
-- `tsconfig.json` extends `@dnbhq/tsconfig/strict` and only covers `.release-it.ts` — there's no other TypeScript source in this repo, TS is used purely for the typed `release-it` config.
+- Biome config extends `@davidsneighbour/biome-config`; don't add a local rule set, extend it instead.
+- `tsconfig.json` extends `@davidsneighbour/tsconfig/strict` and only covers `.release-it.ts` — there's no other TypeScript source in this repo, TS is used purely for the typed `release-it` config.
 - `simple-git-hooks` + `lint-staged` run `biome check --write` on staged `*.{js,json,ts}` at pre-commit.
 
 ## Release process

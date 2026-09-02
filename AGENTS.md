@@ -2,13 +2,13 @@
 
 ## Project Structure & Module Organization
 
-This repository publishes `@dnbhq/browserslist-config`, a small ESM package with two Browserslist entry points:
+This repository publishes `@davidsneighbour/browserslist-config`, a small ESM package with two Browserslist entry points:
 
 - `index.js` exports the default `baseline widely available` target.
 - `full.js` exports `baseline widely available with downstream`.
 - `README.md` documents installation, usage, supported browsers, and release notes.
 - `package.json` defines package exports, published files, scripts, hooks, and release tooling.
-- `biome.json` extends the shared `@dnbhq/biome-config` rules.
+- `biome.json` extends the shared `@davidsneighbour/biome-config` rules.
 
 There is no separate `src/`, test fixture, or asset directory. Keep package contents minimal; only files listed in `package.json#files` are published.
 
@@ -24,7 +24,7 @@ Use Node `>=25`, as declared in `package.json#engines`.
 
 ## Coding Style & Naming Conventions
 
-Use modern ESM syntax and default exports for Browserslist query arrays. Keep entry point files short and readable, with comments only for useful external references. Follow the shared Biome configuration for formatting and linting; do not hand-format against it. File names for exported configurations should be lowercase and stable because consumers import them directly, for example `@dnbhq/browserslist-config/full`.
+Use modern ESM syntax and default exports for Browserslist query arrays. Keep entry point files short and readable, with comments only for useful external references. Follow the shared Biome configuration for formatting and linting; do not hand-format against it. File names for exported configurations should be lowercase and stable because consumers import them directly, for example `@davidsneighbour/browserslist-config/full`.
 
 ## Testing Guidelines
 

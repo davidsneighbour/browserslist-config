@@ -1,16 +1,18 @@
-# @dnbhq/browserslist-config
+# @davidsneighbour/browserslist-config
 
-Shared Browserslist configuration for DNBHQ projects.
+Shared Browserslist configuration for @davidsneighbour's projects.
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Available configs](#available-configs)
-  - [Default](#default)
-  - [Full](#full)
-- [Supported browsers](#supported-browsers)
-- [Design notes](#design-notes)
-- [Release](#release)
-- [Notes](#notes)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Available configs](#available-configs)
+  * [Default](#default)
+  * [Full](#full)
+* [Supported browsers](#supported-browsers)
+  * [Widely available](#widely-available)
+  * [Widely available with downstream](#widely-available-with-downstream)
+* [Design notes](#design-notes)
+* [Release](#release)
+* [Notes](#notes)
 
 ## Installation
 

@@ -19,7 +19,6 @@ const config = {
   github: {
     release: true,
     releaseName: 'v${version}',
-    tokenRef: 'GITHUB_DNBHQ_TOKEN_ADMIN_PRIVATE',
     skipChecks: true,
   },
   plugins: {
@@ -29,9 +28,9 @@ const config = {
       preset: {
         name: 'conventionalcommits',
         commitUrlFormat:
-          'https://github.com/dnbhq/browserslist-config/commit/{{hash}}',
+          'https://github.com/davidsneighbour/browserslist-config/commit/{{hash}}',
         compareUrlFormat:
-          'https://github.com/dnbhq/browserslist-config/compare/{{previousTag}}...{{currentTag}}',
+          'https://github.com/davidsneighbour/browserslist-config/compare/{{previousTag}}...{{currentTag}}',
         types: [
           { type: 'feat', section: 'Features' },
           { type: 'fix', section: 'Bug Fixes' },
