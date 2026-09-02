@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/davidsneighbour/browserslist-config/compare/v0.1.3...v0.1.4) (2026-09-02)
+
+### Build
+
+* **deps:** update dependencies ([12f5412](https://github.com/davidsneighbour/browserslist-config/commit/12f5412ccd9b17f0308ed4b0e91ba4a303eee654))
+* **fix:** don't ask questions on release ([1132126](https://github.com/davidsneighbour/browserslist-config/commit/113212603306fbe8cc52fbb1e0c2ef3239b988b0))
+
 ## [0.1.3](https://github.com/davidsneighbour/browserslist-config/compare/v0.1.2...v0.1.3) (2026-09-02)
 
 ### Chores
